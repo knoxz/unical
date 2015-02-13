@@ -1,0 +1,27 @@
+2015-01-19 08:00:00 - 2015-01-19 09:30:00: 60203 01. Gruppe Europarecht I
+2015-01-20 08:00:00 - 2015-01-20 09:30:00: 60803 Sozialrecht IV.1.- Allgem. SozVersRecht, Recht der GKV aus anwaltlicher Sicht
+2015-01-23 08:00:00 - 2015-01-23 09:30:00: 60101 13. Gruppe Strafrecht AT
+2015-01-19 09:45:00 - 2015-01-19 11:15:00: 60203 02. Gruppe Europarecht I
+2015-01-20 09:45:00 - 2015-01-20 11:15:00: 60101 07. Gruppe Strafrecht AT
+2015-01-22 09:45:00 - 2015-01-22 11:15:00: 61204 Höchstrichterliche Rechtsprechung
+2015-01-23 09:45:00 - 2015-01-23 11:15:00: 60903 Tutorium ELPIS-Kolloquium I (2)
+2015-01-21 11:00:00 - 2015-01-21 12:30:00: 60205 09. Gruppe Allgemeines Verwaltungsrecht
+2015-01-19 11:30:00 - 2015-01-19 13:00:00: 60004 03. Gruppe Sachenrecht I
+2015-01-20 11:30:00 - 2015-01-20 13:00:00: 61106 Juristische Argumentationslehre
+2015-01-22 11:30:00 - 2015-01-22 13:00:00: 61101 Rechtshistorische Quellenexegenese und Vorbereitung auf die Studienarbeit in Rechtsgeschichte und Familienrecht
+2015-01-23 11:30:00 - 2015-01-23 14:30:00: Repititorium Klausurlabor
+2015-01-21 12:45:00 - 2015-01-21 14:15:00: 61203 Kapitalgesellschaftsrecht I
+2015-01-19 13:15:00 - 2015-01-19 16:15:00: Repititorium Klausurlabor
+2015-01-20 14:30:00 - 2015-01-20 16:00:00: 61710 Öffentliches Medienrecht mit europarechtlichen Bezügen
+2015-01-21 14:30:00 - 2015-01-21 16:00:00: 60403 IT-Vertragsrecht
+2015-01-22 14:30:00 - 2015-01-22 16:00:00: 60904 Einführung in das deutsche Recht und die Rechtskultur I
+2015-01-23 16:00:00 - 2015-01-23 18:00:00: Tutorium (Dalmer)
+2015-01-19 16:15:00 - 2015-01-19 17:45:00: 61103 Aktuelle Probleme des Familienrechts in der gerichtlichen Praxis
+2015-01-20 16:15:00 - 2015-01-20 17:45:00: 60203 06. Gruppe Europarecht I
+2015-01-21 16:15:00 - 2015-01-21 17:45:00: 60201 05. Gruppe Verfassungsrecht I (einschließlich Fallbearbeitung)
+2015-01-22 16:15:00 - 2015-01-22 17:45:00: 60207 06. Gruppe Übung und Vertiefung im Öffentlichen Recht für Fortgeschrittene
+2015-01-19 18:00:00 - 2015-01-19 19:30:00: 60001 08. Gruppe Grundkurs BGB I
+2015-01-20 18:00:00 - 2015-01-20 19:30:00: 60203 07. Gruppe Europarecht I
+2015-01-22 18:00:00 - 2015-01-22 19:30:00: 60203 13. Gruppe Europarecht I
+2015-01-21 18:30:00 - 2015-01-21 20:15:00: JULIS_Liberale Hochschulgruppe Hannover
+2015-01-22 20:00:00 - 2015-01-22 20:15:00: Juso Hochschulgruppe Hannover
