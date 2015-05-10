@@ -24,6 +24,7 @@ import requests
 from pyquery import PyQuery as pq
 from datetime import date, datetime, time, timedelta
 from icalendar import Calendar, Event, vText
+from datetime import datetime
 
 version = "0.1.0"
 
@@ -234,11 +235,11 @@ if __name__ == '__main__':
 
     # configure command line parsing
     parser = argparse.ArgumentParser(description='Extract calendar information from HIS-QIS room schedules.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('URL', type=str, help='extract schedule from URL')
+    parser.add_argument('URL', type=str, default="http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=9402", help='extract schedule from URL')
     parser.add_argument('-d', '--debug', action="store_true", help='print debug information')
-    parser.add_argument('-o', '--output', type=str, dest="out_file", default="schedule.ics", metavar="FILE", help='write output to FILE')
+    parser.add_argument('-o', '--output', type=str, dest="out_file", default="save/schedule.ics", metavar="FILE", help='write output to FILE')
     parser.add_argument('-v', '--version', action="version", version="%(prog)s " + version)
-    parser.add_argument('-r', '--roomids', action="store_true", help='parse roomnumbers instead')
+    parser.add_argument('-A', '--allroomids', action="store_true", help='parse all roomnumbers instead. THIS COULD TAKE SOME TIME!!!')
 
 
     args = parser.parse_args()
@@ -250,7 +251,10 @@ if __name__ == '__main__':
     #html = get_file("raum1201.html")
     #html = get_file("raum411_19.html")
     #http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=9402
-    if not args.roomids:
+    baseUrl = 'http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan'
+    
+    if not args.allroomids:
+        a = datetime.now()
         for i in range(16,31): #16-30 Weeks SS15      
             html = get_url(args.URL+'&week='+str(i)+'_2015')
             schedule = Schedule(html)
@@ -260,11 +264,35 @@ if __name__ == '__main__':
         
             calendar = get_calendar([schedule])
             write_calendar(calendar, args.out_file+'week'+str(i)+'.txt')
-    else:
+        b = datetime.now()
+        d = b - a
+        print(d.total_seconds())
+        
+    else: #parse All rooms for all weeks SS15
         html = get_file("rooms.html")
         regex = re.compile('rgid=([0-9]*)')
-        string = regex.findall(html)
-        print(len(string))
-        print(string)
+        roomids = regex.findall(html)
+        print(len(roomids))
+        print(roomids)
+        a = datetime.now()
+        
+        for id in roomids:
+            for i in range(16,31):
+                print('checking room: '+id+' week: '+str(i))
+                html = get_url(baseUrl + '&raum.rgid='+id+'&week='+str(i)+'_2015')
+                schedule = Schedule(html)
+                calendar = get_calendar([schedule])
+                write_calendar(calendar, args.out_file+'room'+id+'week'+str(i)+'.txt')
+                
+                if args.debug:
+                    b = datetime.now()
+                    d = b - a
+                    print('TIME TAKEN:')
+                    print(d.total_seconds())
+                    print('----------')
+        b = datetime.now()
+        d = b - a
+        print('TOTAL TIME TAKEN!!!')
+        print(d.total_seconds())
         
         
