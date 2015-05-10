@@ -1,0 +1,4 @@
+BEGIN:VCALENDAR
+VERSION:0.1
+PRODID:-//raumbelegung.py//l3s.de//
+END:VCALENDAR

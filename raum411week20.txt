@@ -1,0 +1,127 @@
+BEGIN:VCALENDAR
+VERSION:0.1
+PRODID:-//raumbelegung.py//l3s.de//
+BEGIN:VEVENT
+SUMMARY:Einführung in die moderne Politische Theorie
+DTSTART;VALUE=DATE-TIME:20150511T080000
+DTEND;VALUE=DATE-TIME:20150511T100000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=217753&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:POL\, NN
+DTSTART;VALUE=DATE-TIME:20150511T100000
+DTEND;VALUE=DATE-TIME:20150511T160000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=220034&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Einführung in die Politische Soziologie II &#8211\; Grundbegriffe
+  und Theorien der Sozialstrukturanalyse
+DTSTART;VALUE=DATE-TIME:20150512T100000
+DTEND;VALUE=DATE-TIME:20150512T120000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=218090&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Politische Bildungsforschung
+DTSTART;VALUE=DATE-TIME:20150513T100000
+DTEND;VALUE=DATE-TIME:20150513T120000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=217995&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Autokratien im Vergleich
+DTSTART;VALUE=DATE-TIME:20150515T100000
+DTEND;VALUE=DATE-TIME:20150515T120000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=217837&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Aktuelle Herausforderungen kritischer Gesellschaftstheorie
+DTSTART;VALUE=DATE-TIME:20150512T120000
+DTEND;VALUE=DATE-TIME:20150512T140000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=217758&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Unterrichtsplanung anhand ausgewählter Themenfelder des KC Politi
+ k-Wirtschaft: Die Europäische Union
+DTSTART;VALUE=DATE-TIME:20150513T120000
+DTEND;VALUE=DATE-TIME:20150513T160000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=218365&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Einführung in die moderne Politische Theorie
+DTSTART;VALUE=DATE-TIME:20150512T140000
+DTEND;VALUE=DATE-TIME:20150512T160000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=217752&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Forschungs-Kolloquium zur Politischen Bildung
+DTSTART;VALUE=DATE-TIME:20150511T160000
+DTEND;VALUE=DATE-TIME:20150511T190000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=215474&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Einführung in die Politikfeldanalyse
+DTSTART;VALUE=DATE-TIME:20150512T160000
+DTEND;VALUE=DATE-TIME:20150512T180000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=217919&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+BEGIN:VEVENT
+SUMMARY:Einführung in die Unterrichtsplanung
+DTSTART;VALUE=DATE-TIME:20150513T160000
+DTEND;VALUE=DATE-TIME:20150513T180000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=33FA28F
+ CDAF71A85CDB647311E43A59E.uhvqis1?state=verpublish&status=init&vmfile=no&p
+ ublishid=218014&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=v
+ eranstaltung
+END:VEVENT
+END:VCALENDAR

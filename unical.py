@@ -238,22 +238,33 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--debug', action="store_true", help='print debug information')
     parser.add_argument('-o', '--output', type=str, dest="out_file", default="schedule.ics", metavar="FILE", help='write output to FILE')
     parser.add_argument('-v', '--version', action="version", version="%(prog)s " + version)
+    parser.add_argument('-r', '--roomids', action="store_true", help='parse roomnumbers instead')
 
 
     args = parser.parse_args()
-
+    #print(args.URL)
     #base_url = "http://qis.verwaltung.uni-hannover.de"
     #url = base_url + "/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=1201"
     #url = base_url + "/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=5710"
     #html = get_file("raum5710.html")
     #html = get_file("raum1201.html")
-    html = get_file("raum5710_2.html")
-    
-    #html = get_url(args.URL)
-    schedule = Schedule(html)
-
-    if args.debug:
-        print(schedule.__str__().encode("utf-8"))
-
-    calendar = get_calendar([schedule])
-    write_calendar(calendar, args.out_file)
+    #html = get_file("raum411_19.html")
+    #http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=9402
+    if not args.roomids:
+        for i in range(16,31): #16-30 Weeks SS15      
+            html = get_url(args.URL+'&week='+str(i)+'_2015')
+            schedule = Schedule(html)
+        
+            if args.debug:
+                print(schedule.__str__().encode("utf-8"))
+        
+            calendar = get_calendar([schedule])
+            write_calendar(calendar, args.out_file+'week'+str(i)+'.txt')
+    else:
+        html = get_file("rooms.html")
+        regex = re.compile('rgid=([0-9]*)')
+        string = regex.findall(html)
+        print(len(string))
+        print(string)
+        
+        

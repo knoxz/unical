@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:0.1
+PRODID:-//raumbelegung.py//l3s.de//
+BEGIN:VEVENT
+SUMMARY:Nachschreibeklausur BM 3 / Prof. Hönnige
+DTSTART;VALUE=DATE-TIME:20150401T100000
+DTEND;VALUE=DATE-TIME:20150401T120000
+LOCATION:3109 - Schneiderberg 50\, 411 V411 (NB02 Übungs- u. Seminarräum
+ e)
+URL:http://qis.verwaltung.uni-hannover.de/qisserver/rds;jsessionid=0671ED2
+ 7E7E30175EA1692C01ECFA4BD.uhvqis?state=verpublish&status=init&vmfile=no&pu
+ blishid=217589&moduleCall=webInfo&publishConfFile=webInfo&publishSubDir=ve
+ ranstaltung
+END:VEVENT
+END:VCALENDAR
