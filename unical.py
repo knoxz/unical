@@ -267,6 +267,9 @@ if __name__ == '__main__':
         b = datetime.now()
         d = b - a
         print(d.total_seconds())
+        f = open("result.txt", "w")
+        f.write("Total Time taken: "+str(d.total_seconds()))
+        f.close()
         
     else: #parse All rooms for all weeks SS15
         html = get_file("rooms.html")
@@ -294,5 +297,7 @@ if __name__ == '__main__':
         d = b - a
         print('TOTAL TIME TAKEN!!!')
         print(d.total_seconds())
-        
+        f = open("result.txt", "w")
+        f.write("Total Time taken: "+str(d.total_seconds()))
+        f.close()
         
