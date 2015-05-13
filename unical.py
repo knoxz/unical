@@ -235,12 +235,12 @@ if __name__ == '__main__':
 
     # configure command line parsing
     parser = argparse.ArgumentParser(description='Extract calendar information from HIS-QIS room schedules.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('URL', type=str, default="http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=9402", help='extract schedule from URL')
+    parser.add_argument('-rids','--roomids', type=str, dest="roomids", help='enter roomids. seperate with ,')
     parser.add_argument('-d', '--debug', action="store_true", help='print debug information')
     parser.add_argument('-o', '--output', type=str, dest="out_file", default="save/schedule.ics", metavar="FILE", help='write output to FILE')
     parser.add_argument('-v', '--version', action="version", version="%(prog)s " + version)
     parser.add_argument('-A', '--allroomids', action="store_true", help='parse all roomnumbers instead. THIS COULD TAKE SOME TIME!!!')
-
+    
 
     args = parser.parse_args()
     #print(args.URL)
@@ -252,18 +252,20 @@ if __name__ == '__main__':
     #html = get_file("raum411_19.html")
     #http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=9402
     baseUrl = 'http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan'
+    roomArray = args.roomids.split(',')
     
-    if not args.allroomids:
+    if not args.allroomids and len(roomArray)>= 1:
         a = datetime.now()
-        for i in range(16,31): #16-30 Weeks SS15      
-            html = get_url(args.URL+'&week='+str(i)+'_2015')
-            schedule = Schedule(html)
-        
-            if args.debug:
-                print(schedule.__str__().encode("utf-8"))
-        
-            calendar = get_calendar([schedule])
-            write_calendar(calendar, args.out_file+'week'+str(i)+'.txt')
+        for id in roomArray:
+            for i in range(16,31): #16-30 Weeks SS15      
+                html = get_url(baseUrl + '&raum.rgid='+id+'&week='+str(i)+'_2015')
+                schedule = Schedule(html)
+                
+                if args.debug:
+                    print(schedule.__str__().encode("utf-8"))
+            
+                calendar = get_calendar([schedule])
+                write_calendar(calendar, args.out_file+'room'+id+'week'+str(i)+'.txt')
         b = datetime.now()
         d = b - a
         print(d.total_seconds())
@@ -281,13 +283,13 @@ if __name__ == '__main__':
         
         for id in roomids:
             for i in range(16,31):
-                print('checking room: '+id+' week: '+str(i))
                 html = get_url(baseUrl + '&raum.rgid='+id+'&week='+str(i)+'_2015')
                 schedule = Schedule(html)
                 calendar = get_calendar([schedule])
                 write_calendar(calendar, args.out_file+'room'+id+'week'+str(i)+'.txt')
                 
                 if args.debug:
+                    print('checking room: '+id+' week: '+str(i))
                     b = datetime.now()
                     d = b - a
                     print('TIME TAKEN:')
