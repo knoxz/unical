@@ -24,7 +24,6 @@ import requests
 from pyquery import PyQuery as pq
 from datetime import date, datetime, time, timedelta
 from icalendar import Calendar, Event, vText
-from datetime import datetime
 
 version = "0.1.0"
 
@@ -239,6 +238,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Extract calendar information from HIS-QIS room schedules.', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-rid','--roomid', type=str, dest="roomids", help='enter roomid')
     parser.add_argument('-w', '--weeks', type=str, dest="weeks", help='enter start and end week. seperate with ,')
+    parser.add_argument('-nw', '--nextweeks', type=str, dest="nextweeks", help='enter the relative number of weeks you want to be updated in advance')
     parser.add_argument('-d', '--debug', action="store_true", help='print debug information')
     parser.add_argument('-o', '--output', type=str, dest="out_file", default="save/schedule.ics", metavar="FILE", help='write output to FILE')
     parser.add_argument('-v', '--version', action="version", version="%(prog)s " + version)
@@ -246,6 +246,7 @@ if __name__ == '__main__':
     
 
     args = parser.parse_args()
+    
     #print(args.URL)
     #base_url = "http://qis.verwaltung.uni-hannover.de"
     #url = base_url + "/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=1201"
@@ -254,14 +255,21 @@ if __name__ == '__main__':
     #html = get_file("raum1201.html")
     #html = get_file("raum411_19.html")
     #http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=9402
+    
+    
     baseUrl = 'http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan'
     roomArray = args.roomids.split(',')
-    weekArray = args.weeks.split(',')
-    if (len(weekArray) != 2):
-        print('Error. Please add a Start and End week!')
-    start = int(weekArray[0])
-    end = int(weekArray[1])
-    if not args.allroomids and len(roomArray)>= 1:
+    
+    if args.weeks is not None:
+        weekArray = args.weeks.split(',')
+        start = int(weekArray[0])
+        end = int(weekArray[1])
+    if args.nextweeks is not None:
+        nextWeeks = int(args.nextweeks)
+    
+    
+    
+    if not args.allroomids and len(roomArray)>= 1 and args.nextweeks is None:
         a = datetime.now()
         for roomid in roomArray:
             #	for w in weekArray: #weeks given as parameter    
@@ -281,7 +289,21 @@ if __name__ == '__main__':
             f = open("result.txt", "w")
             f.write("Total Time taken: "+str(d.total_seconds()))
             f.close()
+    if args.nextweeks is not None and len(roomArray)>= 1:
+        now = date.today().isocalendar()[1]
         
+        for roomid in roomArray:
+            #    for w in weekArray: #weeks given as parameter    
+            cal = None
+            for w in range(now,now+nextWeeks):
+                html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_2015')
+                schedule = Schedule(html)
+                
+                if args.debug:
+                    print(schedule.__str__().encode("utf-8"))
+                cal = get_calendar([schedule], cal, filename = args.out_file+'room'+roomid+'nextweeks'+str(nextWeeks)+'.ics')
+        write_calendar(cal, args.out_file+'room'+roomid+'nextweeks'+str(nextWeeks)+'.ics')
+                
     else: #parse All rooms for all weeks SS15
         html = get_file("rooms.html")
         regex = re.compile('rgid=([0-9]*)')
