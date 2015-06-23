@@ -241,6 +241,7 @@ if __name__ == '__main__':
     parser.add_argument('-nw', '--nextweeks', type=str, dest="nextweeks", help='enter the relative number of weeks you want to be updated in advance')
     parser.add_argument('-d', '--debug', action="store_true", help='print debug information')
     parser.add_argument('-o', '--output', type=str, dest="out_file", default="save/schedule.ics", metavar="FILE", help='write output to FILE')
+    #/var/unical/unical/save/schedule.ics
     parser.add_argument('-v', '--version', action="version", version="%(prog)s " + version)
     parser.add_argument('-A', '--allroomids', action="store_true", help='parse all roomnumbers instead. THIS COULD TAKE SOME TIME!!!')
     
@@ -259,6 +260,8 @@ if __name__ == '__main__':
     
     baseUrl = 'http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan'
     roomArray = args.roomids.split(',')
+    currentYear = date.today().year
+    #print(currentYear)
     
     if args.weeks is not None:
         weekArray = args.weeks.split(',')
@@ -274,8 +277,14 @@ if __name__ == '__main__':
         for roomid in roomArray:
             #	for w in weekArray: #weeks given as parameter    
             cal = None
+            if(start > end):
+                end = start + end
             for w in range(start,end+1): #weeks given as parameter     
-                html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_2015')
+                if (w > 53):
+                    w = w-53
+                    html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_'+str(currentYear+1))
+                else:
+                    html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_'+str(currentYear))                
                 schedule = Schedule(html)
                 
                 if args.debug:
@@ -296,7 +305,11 @@ if __name__ == '__main__':
             #    for w in weekArray: #weeks given as parameter    
             cal = None
             for w in range(now,now+nextWeeks):
-                html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_2015')
+                if(w>53):
+                    w = w -53
+                    html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_'+str(currentYear+1))
+                else:
+                    html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_'+str(currentYear))
                 schedule = Schedule(html)
                 
                 if args.debug:
@@ -304,33 +317,33 @@ if __name__ == '__main__':
                 cal = get_calendar([schedule], cal, filename = args.out_file+'room'+roomid+'nextweeks'+str(nextWeeks)+'.ics')
         write_calendar(cal, args.out_file+'room'+roomid+'nextweeks'+str(nextWeeks)+'.ics')
                 
-    else: #parse All rooms for all weeks SS15
-        html = get_file("rooms.html")
-        regex = re.compile('rgid=([0-9]*)')
-        roomids = regex.findall(html)
-        print(len(roomids))
-        print(roomids)
-        a = datetime.now()
+    #else: #parse All rooms for all weeks SS15
+        #html = get_file("rooms.html")
+        #regex = re.compile('rgid=([0-9]*)')
+        #roomids = regex.findall(html)
+        #print(len(roomids))
+        #print(roomids)
+        #a = datetime.now()
         
-        for roomid in roomids:
-            for i in range(16,31):
-                html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(i)+'_2015')
-                schedule = Schedule(html)
-                calendar = get_calendar([schedule])
-                write_calendar(calendar, args.out_file+'room'+roomid+'week'+str(i)+'.ics')
-                
-                if args.debug:
-                    print('checking room: '+roomid+' week: '+str(i))
-                    b = datetime.now()
-                    d = b - a
-                    print('TIME TAKEN:')
-                    print(d.total_seconds())
-                    print('----------')
-        b = datetime.now()
-        d = b - a
-        print('TOTAL TIME TAKEN!!!')
-        print(d.total_seconds())
-        f = open("result.txt", "w")
-        f.write("Total Time taken: "+str(d.total_seconds()))
-        f.close()
+        #for roomid in roomids:
+        #    for i in range(16,31):
+        #        html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(i)+'_2015')
+        #        schedule = Schedule(html)
+        #        calendar = get_calendar([schedule])
+        #        write_calendar(calendar, args.out_file+'room'+roomid+'week'+str(i)+'.ics')
+        #        
+        #        if args.debug:
+        #            print('checking room: '+roomid+' week: '+str(i))
+        #            b = datetime.now()
+        #            d = b - a
+        #            print('TIME TAKEN:')
+        #            print(d.total_seconds())
+        #            print('----------')
+        #b = datetime.now()
+        #d = b - a
+        #print('TOTAL TIME TAKEN!!!')
+        #print(d.total_seconds())
+        #f = open("result.txt", "w")
+        #f.write("Total Time taken: "+str(d.total_seconds()))
+        #f.close()
         
