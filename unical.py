@@ -76,6 +76,14 @@ def write_calendar(calendar, filename):
     with open(filename, 'wb') as f:
         f.write(calendar.to_ical())
 
+def isBlank (myString):
+    if myString and myString.strip():
+        #myString is not None AND myString is not empty or blank
+        return False
+    #myString is None OR myString is empty or blank
+    return True
+
+
 #
 # represents a schedule for one room and one week
 #
@@ -132,6 +140,9 @@ class Schedule:
             for c,col in enumerate(cols):
                 cold = pq(col)
                 day = cold("div.klein").text()
+                print('xx'+day+'xx')
+                if isBlank(day):
+                    raise Exception('Only the current semester is supported.')
                 dates.append(datetime.strptime(day, "%d.%m.%Y").date())
 
             # the non-header cells contain the reservations
@@ -257,10 +268,13 @@ if __name__ == '__main__':
     #html = get_file("raum411_19.html")
     #http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=9402
     
+    #http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=9402&week=27_2015
+    
     
     baseUrl = 'http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan'
     roomArray = args.roomids.split(',')
     currentYear = date.today().year
+    #currentYear = 2014
     #print(currentYear)
     
     if args.weeks is not None:
@@ -271,17 +285,16 @@ if __name__ == '__main__':
         nextWeeks = int(args.nextweeks)
     
     
-    
     if not args.allroomids and len(roomArray)>= 1 and args.nextweeks is None:
         a = datetime.now()
         for roomid in roomArray:
-            #	for w in weekArray: #weeks given as parameter    
+            #   for w in weekArray: #weeks given as parameter    
             cal = None
             if(start > end):
                 end = start + end
             for w in range(start,end+1): #weeks given as parameter     
                 if (w > 53):
-                    w = w-53
+                    w = w - 53
                     html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_'+str(currentYear+1))
                 else:
                     html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_'+str(currentYear))                
@@ -306,7 +319,7 @@ if __name__ == '__main__':
             cal = None
             for w in range(now,now+nextWeeks):
                 if(w>53):
-                    w = w -53
+                    w = w - 53
                     html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_'+str(currentYear+1))
                 else:
                     html = get_url(baseUrl + '&raum.rgid='+roomid+'&week='+str(w)+'_'+str(currentYear))
