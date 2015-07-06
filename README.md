@@ -9,6 +9,9 @@ are based on HIS-QIS and generates an iCalendar file.
 - [pyquery](https://pypi.python.org/pypi/pyquery)
 - [icalendar](https://pypi.python.org/pypi/icalendar)
 
+Install requirements with:
+pip install -r requirements.txt
+
 ## parameter
 
  - -rid xxx   ( xxx stands for the room id)
