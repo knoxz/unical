@@ -56,7 +56,7 @@ def get_calendar(schedules, cal, cal_name):
     # calendar metadata
     if cal is None:
         cal = Calendar()
-        cal.add('prodid', ''+cal_name)
+        cal.add('prodid', vText(schedules[0].room_name)+cal_name)
         cal.add('version', '2.0')
         cal.add('method','PUBLISH')
         
@@ -89,12 +89,11 @@ def isBlank (myString):
 #
 class Schedule:
     
-    global max_cols, re_vor, re_nach, calname
+    global max_cols, re_vor, re_nach
 
     max_cols = 9
     re_vor = re.compile("vor\s+([0-9]{1,2})")
     re_nach = re.compile("ab\s+([0-9]{1,2})")
-    calname = 'Uni Hannover GIS Calendar '
 
     def __init__(self, html):
         # local variables
@@ -289,6 +288,7 @@ if __name__ == '__main__':
     
     if not args.allroomids and len(roomArray)>= 1 and args.nextweeks is None:
         a = datetime.now()
+        calname = 'weeks'+str(start)+'till'+str(end)
         for roomid in roomArray:
             #   for w in weekArray: #weeks given as parameter    
             cal = None
@@ -304,7 +304,7 @@ if __name__ == '__main__':
                 
                 if args.debug:
                     print(schedule.__str__().encode("utf-8"))
-                cal = get_calendar([schedule], cal, calname+'weeks'+str(start)+'till'+str(end))
+                cal = get_calendar([schedule], cal, calname)
         write_calendar(cal, args.out_file+'room'+roomid+'week'+str(start)+'-'+str(end)+'.ics')
         if args.debug:
             b = datetime.now()
@@ -315,7 +315,7 @@ if __name__ == '__main__':
             f.close()
     if args.nextweeks is not None and len(roomArray)>= 1:
         now = date.today().isocalendar()[1]
-        
+        calname = 'nextweek'+str(nextWeeks)
         for roomid in roomArray:
             #    for w in weekArray: #weeks given as parameter    
             cal = None
@@ -329,7 +329,7 @@ if __name__ == '__main__':
                 
                 if args.debug:
                     print(schedule.__str__().encode("utf-8"))
-                cal = get_calendar([schedule], cal, calname+'nextweek'+str(nextWeeks))
+                cal = get_calendar([schedule], cal, calname)
         write_calendar(cal, args.out_file+'room'+roomid+'nextweeks'+str(nextWeeks)+'.ics')
                 
     #else: #parse All rooms for all weeks SS15
