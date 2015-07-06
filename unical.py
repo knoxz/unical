@@ -52,11 +52,11 @@ def get_url(url):
         raise HttpError(response.status_code, response.text)
 
 
-def get_calendar(schedules, cal, filename):
+def get_calendar(schedules, cal, cal_name):
     # calendar metadata
     if cal is None:
         cal = Calendar()
-        cal.add('prodid', 'http://dev.qrizl.com:1339/api/getCal/'+filename)
+        cal.add('prodid', ''+cal_name)
         cal.add('version', '2.0')
         cal.add('method','PUBLISH')
         
@@ -88,12 +88,13 @@ def isBlank (myString):
 # represents a schedule for one room and one week
 #
 class Schedule:
-
-    global max_cols, re_vor, re_nach
+    
+    global max_cols, re_vor, re_nach, calname
 
     max_cols = 9
     re_vor = re.compile("vor\s+([0-9]{1,2})")
     re_nach = re.compile("ab\s+([0-9]{1,2})")
+    calname = 'Uni Hannover GIS Calendar '
 
     def __init__(self, html):
         # local variables
@@ -117,7 +118,7 @@ class Schedule:
 
         self.room_name = d("html body div#wrapper div.divcontent div.content_max form.form table tr td h4 a.nav").text()
         self.week = int(d("html body div#wrapper div.divcontent div.content_max table.normal tr td.menu1_on fieldset form.form b").text().split(" ")[1])
-
+        calname = vText(self.room_name)
         # the current time while parsing the table
         curr_time = {"hour" :  0, "minute" : 0}
         # found dates
@@ -252,6 +253,7 @@ if __name__ == '__main__':
     parser.add_argument('-nw', '--nextweeks', type=str, dest="nextweeks", help='enter the relative number of weeks you want to be updated in advance')
     parser.add_argument('-d', '--debug', action="store_true", help='print debug information')
     parser.add_argument('-o', '--output', type=str, dest="out_file", default="save/schedule.ics", metavar="FILE", help='write output to FILE')
+	#parser.add_argument('-rn', '--roomname', type=str, dest="cal_name", default="Uni Hannover GIS Calendar", help='calendar name')
     #/var/unical/unical/save/schedule.ics
     parser.add_argument('-v', '--version', action="version", version="%(prog)s " + version)
     parser.add_argument('-A', '--allroomids', action="store_true", help='parse all roomnumbers instead. THIS COULD TAKE SOME TIME!!!')
@@ -302,7 +304,7 @@ if __name__ == '__main__':
                 
                 if args.debug:
                     print(schedule.__str__().encode("utf-8"))
-                cal = get_calendar([schedule], cal, filename = args.out_file+'room'+roomid+'week'+str(start)+'-'+str(end)+'.ics')
+                cal = get_calendar([schedule], cal, calname+'weeks'+str(start)+'till'+str(end))
         write_calendar(cal, args.out_file+'room'+roomid+'week'+str(start)+'-'+str(end)+'.ics')
         if args.debug:
             b = datetime.now()
@@ -327,7 +329,7 @@ if __name__ == '__main__':
                 
                 if args.debug:
                     print(schedule.__str__().encode("utf-8"))
-                cal = get_calendar([schedule], cal, filename = args.out_file+'room'+roomid+'nextweeks'+str(nextWeeks)+'.ics')
+                cal = get_calendar([schedule], cal, calname+'nextweek'+str(nextWeeks))
         write_calendar(cal, args.out_file+'room'+roomid+'nextweeks'+str(nextWeeks)+'.ics')
                 
     #else: #parse All rooms for all weeks SS15
