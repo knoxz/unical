@@ -140,7 +140,7 @@ class Schedule:
             for c,col in enumerate(cols):
                 cold = pq(col)
                 day = cold("div.klein").text()
-                print('xx'+day+'xx')
+                #print('xx'+day+'xx')
                 if isBlank(day):
                     raise Exception('Only the current semester is supported.')
                 dates.append(datetime.strptime(day, "%d.%m.%Y").date())
