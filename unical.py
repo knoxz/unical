@@ -23,7 +23,7 @@ import argparse
 import requests
 from pyquery import PyQuery as pq
 from datetime import date, datetime, time, timedelta
-from icalendar import Calendar, Event, vText
+from icalendar import Calendar, Event, vText, LocalTimezone
 
 version = "0.1.0"
 
@@ -56,10 +56,30 @@ def get_calendar(schedules, cal, cal_name):
     # calendar metadata
     if cal is None:
         cal = Calendar()
-        cal.add('prodid', vText(schedules[0].room_name)+cal_name)
+        cal.add('prodid', '-//Uni Hannover//Room ICal Calendar//DE')
+        cal.add('X-WR-CALNAME',vText(schedules[0].room_name)+cal_name)
+        cal.add('X-WR-TIMEZONE','Europe/Berlin')
         cal.add('version', '2.0')
         cal.add('method','PUBLISH')
         
+        #=======================================================================
+        # cal.add('BEGIN','VTIMEZONE')
+        # cal.add('TZID','Europe/Berlin')
+        # cal.add('BEGIN','DAYLIGHT')
+        # cal.add('TZOFFSETFROM','+0100')
+        # cal.add('DTSTART','19810329T020000')
+        # cal.add('RRULE','FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU')
+        # cal.add('TZNAME','MESZ')
+        # cal.add('END','DAYLIGHT')
+        # cal.add('BEGIN','STANDARD')
+        # cal.add('TZOFFSETFROM','+0200')
+        # cal.add('DTSTART','19961027T030000')
+        # cal.add('RRULE','FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU')
+        # cal.add('TZNAME','MEZ')
+        # cal.add('END','STANDARD')
+        # cal.add('END','VTIMEZONE')
+        #=======================================================================
+                
     for schedule in schedules:
         for reservation in schedule.reservations:
             event = Event()
@@ -175,9 +195,16 @@ class Schedule:
                         a = pq(cold("table tr td a.ver"))
                         if a:
                             # build start and end dates
+                            #lt = LocalTimezone() # we append the local timezone to each time so that icalendar will convert to UTC in the output
                             today = dates[act_col - 2] # ignore first two columns
+                            #print('act_col: '+str(act_col))
                             length = timedelta(minutes = 15 * rowspan)
                             start = datetime.combine(today, time(hour = curr_time["hour"], minute=curr_time["minute"]))
+                            #print('Title: '+a.attr("title"))
+                            #print('TimeS: '+str(start))
+                            ending = start + length
+                            #print('TimeE: '+ str(ending))
+                            #print('')
                             self.add_reservation(
                                 start = start,
                                 end = start + length,
@@ -269,7 +296,7 @@ if __name__ == '__main__':
     #html = get_file("raum411_19.html")
     #http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=9402
     
-    #http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=9402&week=27_2015
+    #http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan&raum.rgid=1171&week=28_2015
     
     
     baseUrl = 'http://qis.verwaltung.uni-hannover.de/qisserver/rds?state=wplan&act=Raum&pool=Raum&show=plan&P.subc=plan'
