@@ -1,0 +1,26 @@
+2015-07-10 08:15:00 - 2015-07-10 09:45:00: 35560 Übung: Grundlagen der elektrischen Messtechnik
+2015-07-06 08:30:00 - 2015-07-06 10:00:00: 11559 Effiziente Algorithmen
+2015-07-09 08:45:00 - 2015-07-09 10:15:00: 11220 Mobile Interaktion
+2015-07-07 09:15:00 - 2015-07-07 10:45:00: 11470 Industrielle Steuerungstechnik und Echtzeitsysteme
+2015-07-09 09:30:00 - 2015-07-09 11:00:00: 11550 Komplexität von Algorithmen
+2015-07-06 10:15:00 - 2015-07-06 11:45:00: 11566 Logik und formale Systeme
+2015-07-08 10:15:00 - 2015-07-08 11:00:00: 11222 Übung: Mobile Interaktion
+2015-07-07 11:00:00 - 2015-07-07 11:45:00: 11472 Übung: Industrielle Steuerungstechnik und Echtzeitsysteme
+2015-07-08 11:00:00 - 2015-07-08 12:00:00: 11272 Übung: Software-Qualität
+2015-07-10 11:00:00 - 2015-07-10 12:30:00: 36834 Formale Methoden der Informationstechnik
+2015-07-09 11:15:00 - 2015-07-09 12:45:00: 11412 08. Gruppe Gruppenübungen zu Grundlagen der  Rechnerarchitektur
+2015-07-08 12:15:00 - 2015-07-08 13:00:00: 36836 Übung: Formale Methoden der Informationstechnik
+2015-07-10 12:30:00 - 2015-07-10 14:00:00: 11412 06. Gruppe Gruppenübungen zu Grundlagen der  Rechnerarchitektur
+2015-07-06 13:00:00 - 2015-07-06 14:30:00: 11270 Software-Qualität
+2015-07-09 13:00:00 - 2015-07-09 13:45:00: 35062 Übung: Grundlagen der Nachrichtentechnik
+2015-07-09 14:00:00 - 2015-07-09 15:30:00: 11716 Künstliche Intelligenz
+2015-07-07 14:30:00 - 2015-07-07 16:00:00: 11718 Übung: Künstliche Intelligenz
+2015-07-06 15:00:00 - 2015-07-06 16:15:00: 11710 Personalisierung und Benutzermodellierung
+2015-07-10 15:00:00 - 2015-07-10 16:30:00: 36800 Digitalschaltungen der Elektronik
+2015-07-07 16:00:00 - 2015-07-07 16:45:00: 11561 Übungen zu Effiziente Algorithmen
+2015-07-08 16:00:00 - 2015-07-08 17:30:00: 11410 Grundlagen der Rechnerarchitektur
+2015-07-09 16:00:00 - 2015-07-09 16:45:00: 11416 Übung: Betriebssysteme
+2015-07-06 16:30:00 - 2015-07-06 17:15:00: 11712 Übung: Personalisierung und Benutzermodellierung
+2015-07-10 16:45:00 - 2015-07-10 17:30:00: 36802 Übung: Digitalschaltungen der Elektronik
+2015-07-06 17:30:00 - 2015-07-06 19:00:00: 35554 Sensoren in der Medizintechnik
+2015-07-06 19:15:00 - 2015-07-06 20:00:00: 35556 Übung: Sensoren in der Medizintechnik'
