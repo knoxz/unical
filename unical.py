@@ -21,6 +21,7 @@ from __future__ import print_function
 import re
 import argparse
 import requests
+import icalendar
 from pyquery import PyQuery as pq
 from datetime import date, datetime, time, timedelta
 from icalendar import Calendar, Event, vText, LocalTimezone
@@ -57,27 +58,58 @@ def get_calendar(schedules, cal, cal_name):
     if cal is None:
         cal = Calendar()
         cal.add('prodid', '-//Uni Hannover//Room ICal Calendar//DE')
-        cal.add('X-WR-CALNAME',vText(schedules[0].room_name)+cal_name)
+        cal.add('X-WR-CALNAME',vText(schedules[0].room_name))
         cal.add('X-WR-TIMEZONE','Europe/Berlin')
         cal.add('version', '2.0')
+        cal.add('calscale','GREGORIAN')
         cal.add('method','PUBLISH')
         
+        
+        tzc = icalendar.Timezone()
+        tzc.add('tzid', 'Europe/Berlin')
+        tzc.add('x-lic-location', 'Europe/Berlin')
+
+        tzs = icalendar.TimezoneStandard()
+        tzs.add('tzname', 'CET')
+        tzs.add('dtstart', datetime(1970, 10, 25, 3, 0, 0))
+        tzs.add('rrule', {'freq': 'yearly', 'bymonth': 10, 'byday': '-1su'})
+        tzs.add('TZOFFSETFROM', timedelta(hours=2))
+        tzs.add('TZOFFSETTO', timedelta(hours=1))
+
+        tzd = icalendar.TimezoneDaylight()
+        tzd.add('tzname', 'CEST')
+        tzd.add('dtstart', datetime(1970, 3, 29, 2, 0, 0))
+        tzd.add('rrule', {'freq': 'yearly', 'bymonth': 3, 'byday': '-1su'})
+        tzd.add('TZOFFSETFROM', timedelta(hours=1))
+        tzd.add('TZOFFSETTO', timedelta(hours=2))
+
+        tzc.add_component(tzs)
+        tzc.add_component(tzd)
+        cal.add_component(tzc)
+        
+        
+        
+        #=======================================================================
         #=======================================================================
         # cal.add('BEGIN','VTIMEZONE')
         # cal.add('TZID','Europe/Berlin')
+        # cal.add('X-LIC-LOCATION','Europe/Berlin')
         # cal.add('BEGIN','DAYLIGHT')
-        # cal.add('TZOFFSETFROM','+0100')
-        # cal.add('DTSTART','19810329T020000')
-        # cal.add('RRULE','FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU')
-        # cal.add('TZNAME','MESZ')
+        # cal.add('TZOFFSETFROM',timedelta(hours=1))
+        # cal.add('TZOFFSETTO',timedelta(hours=2))
+        # cal.add('TZNAME','CEST')
+        # cal.add('DTSTART',datetime(1970, 3, 29, 2, 0, 0))
+        # cal.add('rrule', {'freq': 'yearly', 'bymonth': 3, 'byday': '-1su'})
         # cal.add('END','DAYLIGHT')
         # cal.add('BEGIN','STANDARD')
-        # cal.add('TZOFFSETFROM','+0200')
-        # cal.add('DTSTART','19961027T030000')
-        # cal.add('RRULE','FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU')
-        # cal.add('TZNAME','MEZ')
+        # cal.add('TZOFFSETFROM',timedelta(hours=2))
+        # cal.add('TZOFFSETTO',timedelta(hours=1))
+        # cal.add('TZNAME','CEST')
+        # cal.add('DTSTART',datetime(1970,10,25, 3, 0, 0))
+        # cal.add('rrule', {'freq': 'yearly', 'bymonth': 10, 'byday': '-1su'})
         # cal.add('END','STANDARD')
         # cal.add('END','VTIMEZONE')
+        #=======================================================================
         #=======================================================================
                 
     for schedule in schedules:
